@@ -1,0 +1,6 @@
+package com.mygdx.game.enums;
+
+public enum Atributos {
+
+	FUERZA,VIDA,RESISTENCIA,AGILIDAD,BLOQUEO,CARISMA,INTELIGENCIA,SUERTE,MAGIA,ARMAS;
+}
