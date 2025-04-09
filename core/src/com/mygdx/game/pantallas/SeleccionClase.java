@@ -17,6 +17,7 @@ import com.kotcrab.vis.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.enums.Clases;
+import com.mygdx.game.utiles.ConfiguracionesJuego;
 import com.mygdx.game.utiles.Recursos;
 
 public class SeleccionClase implements Screen{
@@ -24,7 +25,6 @@ public class SeleccionClase implements Screen{
 	private Game g;
 	private Stage stage;
 	private Skin skin;
-	private Clases claseSeleccionada = Clases.SINCLASE;
 	public SeleccionClase(Game g) {
 		this.g = g;
 	}
@@ -37,6 +37,7 @@ public class SeleccionClase implements Screen{
 
 		Table table = new Table();
 		table.setFillParent(true);
+		table.pad(5);
 
 		Table table1 = new Table();
 
@@ -86,8 +87,8 @@ public class SeleccionClase implements Screen{
 		    child.addListener(new ClickListener() {
 		        @Override
 		        public void clicked(InputEvent event, float x, float y) {
-		            claseSeleccionada = (Clases) child.getUserObject(); // 👈 casteo directo
-		            System.out.println("Clase seleccionada: " + claseSeleccionada);
+		            ConfiguracionesJuego.claseJugador = (Clases) child.getUserObject(); // 👈 casteo directo
+		            System.out.println("Clase seleccionada: " + ConfiguracionesJuego.claseJugador);
 		        }
 		    });
 		}
@@ -101,9 +102,9 @@ public class SeleccionClase implements Screen{
 		imageButton.addListener(new ClickListener() {
 		    @Override
 		    public void clicked(InputEvent event, float x, float y) {
-		    	if(claseSeleccionada != Clases.SINCLASE) {		    		
+		    	if(ConfiguracionesJuego.claseJugador != Clases.SINCLASE) {		    		
 		        System.out.println("click");
-		        g.setScreen(new RepartirAtributos(g, claseSeleccionada));
+		        g.setScreen(new RepartirAtributos(g));
 		    	}else {
 		    		System.out.println("Debe elegir una clase");
 		    	}
