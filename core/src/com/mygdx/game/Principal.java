@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.kotcrab.vis.ui.VisUI;
 import com.mygdx.game.enums.Clases;
 import com.mygdx.game.pantallas.SeleccionClase;
+import com.mygdx.game.pantallas.Tienda;
+import com.mygdx.game.pantallas.TiendaArmas;
 import com.mygdx.game.pantallas.NombrarPersonaje;
 import com.mygdx.game.pantallas.RepartirAtributos;
 
@@ -17,7 +19,7 @@ public class Principal extends Game {
 	@Override
 	public void create () {
 		VisUI.load();
-		this.setScreen(new NombrarPersonaje(this));
+		this.setScreen(new TiendaArmas(this));
 	}
 
 	@Override

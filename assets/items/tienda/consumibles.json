@@ -1,0 +1,11 @@
+[
+    {
+      "nombre": "Pocion de curacion",
+      "descripcion": "Refrescante burbujeo",
+      "precio": 15,
+      "tipo": "consumible",
+      "efecto": "curacion",
+      "duracion": "20"
+    }
+  ]
+  
