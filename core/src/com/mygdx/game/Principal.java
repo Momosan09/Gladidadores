@@ -9,7 +9,8 @@ import com.kotcrab.vis.ui.VisUI;
 import com.mygdx.game.enums.Clases;
 import com.mygdx.game.pantallas.SeleccionClase;
 import com.mygdx.game.pantallas.Tienda;
-import com.mygdx.game.pantallas.TiendaArmas;
+import com.mygdx.game.pantallas.tiendas.TiendaArmaduras;
+import com.mygdx.game.pantallas.tiendas.TiendaArmas;
 import com.mygdx.game.pantallas.NombrarPersonaje;
 import com.mygdx.game.pantallas.RepartirAtributos;
 
@@ -19,7 +20,7 @@ public class Principal extends Game {
 	@Override
 	public void create () {
 		VisUI.load();
-		this.setScreen(new TiendaArmas(this));
+		this.setScreen(new TiendaArmaduras(this));
 	}
 
 	@Override

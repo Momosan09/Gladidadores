@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.enums.Atributos;
 import com.mygdx.game.enums.Clases;
+import com.mygdx.game.items.Item;
+
 import java.util.EnumMap;
 
 import com.mygdx.game.utiles.ConfiguracionesJuego;
@@ -38,6 +40,8 @@ public class Tienda implements Screen{
 	protected Table tablaDeItems;
 	protected Label labelDeDescirpcion;
 	protected ScrollPane scrollPaneItems;
+	
+	protected Item itemSeleccionado;//se asigna en las clases hijas
 	
 	public Tienda(Game g) {
 		this.g = g;
@@ -73,13 +77,25 @@ public class Tienda implements Screen{
 	    panelCentral.row();
 
 	    Table botones = new Table();
-	    ImageButton botonComprar = new ImageButton(skin);
-	    botonComprar.setColor(skin.getColor("red"));
-	    botones.add(botonComprar).expandX();
+
 
 	    ImageButton botonCancelar = new ImageButton(skin);
-	    botonCancelar.setColor(skin.getColor("green"));
+	    botonCancelar.setColor(skin.getColor("red"));
 	    botones.add(botonCancelar).expandX();
+	    
+	    ImageButton botonComprar = new ImageButton(skin);
+	    botonComprar.setColor(skin.getColor("green"));
+	    botonComprar.addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                	if(itemSeleccionado !=null) {                		
+                    System.out.println("Comprar " + itemSeleccionado.precio);
+                	}
+                    
+        
+                }
+            });
+	    botones.add(botonComprar).expandX();
 
 	    panelCentral.add(botones).growX();
 

@@ -1,9 +1,10 @@
-package com.mygdx.game.pantallas;
+package com.mygdx.game.pantallas.tiendas;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.items.Arma;
+import com.mygdx.game.pantallas.Tienda;
 import com.mygdx.game.utiles.Recursos;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -37,6 +38,7 @@ public class TiendaArmas extends Tienda{
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.println("click");
+                    itemSeleccionado = arma;
                     labelDeDescirpcion.setText(arma.descripcion);
                 }
             });
