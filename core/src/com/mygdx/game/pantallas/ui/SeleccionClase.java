@@ -24,16 +24,64 @@ import com.mygdx.game.utiles.ConfiguracionesJuego;
 import com.mygdx.game.utiles.Recursos;
 
 public class SeleccionClase extends Pantalla{
-
-	private Stage stage;
 	
 	public SeleccionClase() {
 		stage = new Stage(new ScreenViewport());
+		// ATENCION, La creacion de la stage va en el constructor de la clase y no en show porque como lo que estoy haciendo en PantallasManager es que se mantenga la misma pantalla (y no crear distintas instacias de la misma) cada vez que se cambia de pantalla cuando se "va y vuelve" entre pantallas, con el formato del show, me esta creando todos los actores de la stage de cero. haciendo que si incialmente una stage tiene 20 actores, la segunda vez que se "abra" esa pantalla va a tener 40, la tercera 60 y asi. Dejando la creacion en el constructor las cosas solo se crean una vez. Se puede usar show para otras cosas igual, como por ejemplo un contador de tiempo, ahi si, queres que el tiempo se reinicie cada vez que se abre la pantalla
+		crearActores();
+		
 	}
 	
 	@Override
 	public void show() {
+		// ATENCION, La creacion de la stage va en el constructor de la clase y no en show porque como lo que estoy haciendo en PantallasManager es que se mantenga la misma pantalla (y no crear distintas instacias de la misma) cada vez que se cambia de pantalla cuando se "va y vuelve" entre pantallas, con el formato del show, me esta creando todos los actores de la stage de cero. haciendo que si incialmente una stage tiene 20 actores, la segunda vez que se "abra" esa pantalla va a tener 40, la tercera 60 y asi. Dejando la creacion en el constructor las cosas solo se crean una vez. Se puede usar show para otras cosas igual, como por ejemplo un contador de tiempo, ahi si, queres que el tiempo se reinicie cada vez que se abre la pantalla
 
+
+	}
+
+	@Override
+	public void render(float delta) {
+
+		if(visible) {
+		stage.act(delta);
+		stage.draw();
+		visBandera = false;
+		}else {
+			if(!visBandera) {
+				stage.unfocusAll();
+				visBandera = true;
+			}
+		}
+	}
+
+	@Override
+	public void resize(int width, int height) {
+	}
+
+	@Override
+	public void pause() {
+	}
+
+	@Override
+	public void resume() {
+	}
+
+	@Override
+	public void hide() {
+	}
+
+	@Override
+	public void dispose() {
+		stage.unfocusAll();
+		stage.dispose();
+	}
+
+	public Stage getStage() {
+		return stage;
+	}
+	
+
+	private void crearActores() {
 		Skin skin = VisUI.getSkin(); // Usar la skin que viene con VisUI
 
 
@@ -106,6 +154,7 @@ public class SeleccionClase extends Pantalla{
 		    public void clicked(InputEvent event, float x, float y) {
 		    	if(ConfiguracionesJuego.claseJugador != Clases.SINCLASE) {		    		
 		        System.out.println("click");
+		        stage.unfocusAll();
 		        ConfiguracionesJuego.pantallaActual = PantallasDelJuego.REPARTIR_ATRIBUTOS;
 		    	}else {
 		    		System.out.println("Debe elegir una clase");
@@ -117,40 +166,5 @@ public class SeleccionClase extends Pantalla{
 		table1.add(imageButton);
 		table.add(table1).grow();
 		stage.addActor(table);
-
-
 	}
-
-	@Override
-	public void render(float delta) {
-		stage.act(delta);
-		stage.draw();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-	}
-
-	@Override
-	public void pause() {
-	}
-
-	@Override
-	public void resume() {
-	}
-
-	@Override
-	public void hide() {
-	}
-
-	@Override
-	public void dispose() {
-		stage.unfocusAll();
-		stage.dispose();
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-	
 }

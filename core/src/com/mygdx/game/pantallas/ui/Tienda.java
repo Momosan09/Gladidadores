@@ -23,6 +23,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.enums.Atributos;
 import com.mygdx.game.enums.Clases;
 import com.mygdx.game.items.Item;
+import com.mygdx.game.pantallas.Pantalla;
 
 import java.util.EnumMap;
 
@@ -30,7 +31,7 @@ import com.mygdx.game.utiles.ConfiguracionesJuego;
 import com.mygdx.game.utiles.Recursos;
 
 
-public abstract class Tienda implements Screen{
+public abstract class Tienda extends Pantalla{
 
 	
 	private Game g;
@@ -131,8 +132,16 @@ public abstract class Tienda implements Screen{
 
 	@Override
 	public void render(float delta) {
-		stage.act();
+		if(visible) {
+		stage.act(delta);
 		stage.draw();
+		visBandera = false;
+		}else {
+			if(!visBandera) {
+				stage.unfocusAll();
+				visBandera = true;
+			}
+		}
 	}
 
 	@Override

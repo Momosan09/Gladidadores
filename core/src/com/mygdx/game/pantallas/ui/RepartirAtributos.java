@@ -11,23 +11,64 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.mygdx.game.enums.Atributos;
 import com.mygdx.game.enums.PantallasDelJuego;
+import com.mygdx.game.pantallas.Pantalla;
 import com.mygdx.game.utiles.ConfiguracionesJuego;
 
 import java.util.EnumMap;
 
-public class RepartirAtributos implements Screen {
-
-    private Stage stage;
+public class RepartirAtributos extends Pantalla {
 
     private EnumMap<Atributos, Label> labelsAtributos = new EnumMap<>(Atributos.class); // para actualizar visualmente
+    private Label labelClase;
 
     public RepartirAtributos() {
 		stage = new Stage(new ScreenViewport());
+		crearActores();// ATENCION, La creacion de la stage va en el constructor de la clase y no en show porque como lo que estoy haciendo en PantallasManager es que se mantenga la misma pantalla (y no crear distintas instacias de la misma) cada vez que se cambia de pantalla cuando se "va y vuelve" entre pantallas, con el formato del show, me esta creando todos los actores de la stage de cero. haciendo que si incialmente una stage tiene 20 actores, la segunda vez que se "abra" esa pantalla va a tener 40, la tercera 60 y asi. Dejando la creacion en el constructor las cosas solo se crean una vez. Se puede usar show para otras cosas igual, como por ejemplo un contador de tiempo, ahi si, queres que el tiempo se reinicie cada vez que se abre la pantalla
+
     }
 
     @Override
     public void show() {
-        Skin skin = VisUI.getSkin();
+    	// ATENCION, La creacion de la stage va en el constructor de la clase y no en show porque como lo que estoy haciendo en PantallasManager es que se mantenga la misma pantalla (y no crear distintas instacias de la misma) cada vez que se cambia de pantalla cuando se "va y vuelve" entre pantallas, con el formato del show, me esta creando todos los actores de la stage de cero. haciendo que si incialmente una stage tiene 20 actores, la segunda vez que se "abra" esa pantalla va a tener 40, la tercera 60 y asi. Dejando la creacion en el constructor las cosas solo se crean una vez. Se puede usar show para otras cosas igual, como por ejemplo un contador de tiempo, ahi si, queres que el tiempo se reinicie cada vez que se abre la pantalla
+    	labelClase.setText("Clase: " + ConfiguracionesJuego.claseJugador);
+    }
+
+    @Override
+    public void render(float delta) {
+		if(visible) {
+		stage.act(delta);
+		stage.draw();
+		visBandera = false;
+		}else {
+			if(!visBandera) {
+				stage.unfocusAll();
+				visBandera = true;
+			}
+		}
+    }
+
+    @Override
+    public void resize(int width, int height) {}
+
+    @Override
+    public void pause() {}
+
+    @Override
+    public void resume() {}
+
+    @Override
+    public void hide() {}
+
+    @Override
+    public void dispose() {}
+    
+    
+    public Stage getStage() {
+    	return stage;
+    }
+    
+    private void crearActores() {
+    	Skin skin = VisUI.getSkin();
 
         // Inicializar los atributos solo si no fueron inicializados antes
         if (ConfiguracionesJuego.puntosAtributos.isEmpty()) {
@@ -47,8 +88,8 @@ public class RepartirAtributos implements Screen {
 
         table1.row();
 
-        label = new Label("Clase: " + ConfiguracionesJuego.claseJugador, skin);
-        table1.add(label).padBottom(5);
+        labelClase = new Label("Clase: " + ConfiguracionesJuego.claseJugador, skin);
+        table1.add(labelClase).padBottom(5);
         table1.row();
 
         final Label labelPuntos = new Label("Puntos: " + ConfiguracionesJuego.puntosDisponibles, skin);
@@ -129,7 +170,8 @@ public class RepartirAtributos implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (ConfiguracionesJuego.puntosDisponibles == 0) {
-                	ConfiguracionesJuego.pantallaActual = PantallasDelJuego.NOMBRAR_PERSONAJE;
+    		        stage.unfocusAll();
+    		        ConfiguracionesJuego.pantallaActual = PantallasDelJuego.NOMBRAR_PERSONAJE;
                 } else {
                     System.out.println("Primero asigne todos los puntos");
                 }
@@ -140,30 +182,5 @@ public class RepartirAtributos implements Screen {
         table1.add(table2).grow();
         table.add(table1).grow();
         stage.addActor(table);
-    }
-
-    @Override
-    public void render(float delta) {
-        stage.draw();
-    }
-
-    @Override
-    public void resize(int width, int height) {}
-
-    @Override
-    public void pause() {}
-
-    @Override
-    public void resume() {}
-
-    @Override
-    public void hide() {}
-
-    @Override
-    public void dispose() {}
-    
-    
-    public Stage getStage() {
-    	return stage;
     }
 }

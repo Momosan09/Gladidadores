@@ -1,6 +1,7 @@
 package com.mygdx.game.pantallas;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 
 /**
@@ -10,7 +11,9 @@ import com.badlogic.gdx.Screen;
  */
 public class Pantalla implements Screen, Ocultable{
 	
-	protected boolean visible;
+	protected Stage stage;//pense en hacer una clase hija que contenga este campo pero pensandolo bien la mayoria de las pantallas va a necesitar una stage
+	protected boolean visible = false;
+	protected boolean visBandera = false;//Bandera para visible
 
 	@Override
 	public void show() {
@@ -48,6 +51,10 @@ public class Pantalla implements Screen, Ocultable{
 	@Override
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	
+	public Stage getStage() {
+		return stage;
 	}
 
 }

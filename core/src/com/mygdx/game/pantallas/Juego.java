@@ -2,16 +2,16 @@ package com.mygdx.game.pantallas;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.mygdx.game.Principal;
 import com.mygdx.game.enums.EstadosDelJuego;
 import com.mygdx.game.utiles.ConfiguracionesJuego;
 
-public class Juego implements Screen{
+public class Juego extends Pantalla{
 
-	private Game g;
 	private UIManager pm;
 	
-	public Juego(Game g) {
-		this.g = g;
+	public Juego() {
+
 		pm = new UIManager();
 
 	}
