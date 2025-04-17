@@ -1,4 +1,4 @@
-package com.mygdx.game.pantallas;
+package com.mygdx.game.pantallas.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -10,27 +10,24 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.mygdx.game.enums.Atributos;
+import com.mygdx.game.enums.PantallasDelJuego;
 import com.mygdx.game.utiles.ConfiguracionesJuego;
 
 import java.util.EnumMap;
 
 public class RepartirAtributos implements Screen {
 
-    private Game g;
     private Stage stage;
-    private Skin skin;
 
     private EnumMap<Atributos, Label> labelsAtributos = new EnumMap<>(Atributos.class); // para actualizar visualmente
 
-    public RepartirAtributos(Game g) {
-        this.g = g;
+    public RepartirAtributos() {
+		stage = new Stage(new ScreenViewport());
     }
 
     @Override
     public void show() {
-        stage = new Stage(new ScreenViewport());
-        skin = VisUI.getSkin();
-        Gdx.input.setInputProcessor(stage);
+        Skin skin = VisUI.getSkin();
 
         // Inicializar los atributos solo si no fueron inicializados antes
         if (ConfiguracionesJuego.puntosAtributos.isEmpty()) {
@@ -66,7 +63,7 @@ public class RepartirAtributos implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println("Volver para atras click");
-                g.setScreen(new SeleccionClase(g));
+                ConfiguracionesJuego.pantallaActual = PantallasDelJuego.SELECCION_CLASE;
             }
         });
         table2.add(imageButton);
@@ -132,7 +129,7 @@ public class RepartirAtributos implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 if (ConfiguracionesJuego.puntosDisponibles == 0) {
-                    g.setScreen(new NombrarPersonaje(g));
+                	ConfiguracionesJuego.pantallaActual = PantallasDelJuego.NOMBRAR_PERSONAJE;
                 } else {
                     System.out.println("Primero asigne todos los puntos");
                 }
@@ -164,4 +161,9 @@ public class RepartirAtributos implements Screen {
 
     @Override
     public void dispose() {}
+    
+    
+    public Stage getStage() {
+    	return stage;
+    }
 }

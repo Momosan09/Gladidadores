@@ -1,4 +1,4 @@
-package com.mygdx.game.pantallas.tiendas;
+package com.mygdx.game.pantallas.ui.tiendas;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.mygdx.game.items.Arma;
 import com.mygdx.game.items.Armadura;
-import com.mygdx.game.pantallas.Tienda;
+import com.mygdx.game.pantallas.ui.Tienda;
 import com.mygdx.game.utiles.Recursos;
 
 public class TiendaArmaduras extends Tienda{

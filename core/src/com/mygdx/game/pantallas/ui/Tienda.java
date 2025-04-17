@@ -1,4 +1,4 @@
-package com.mygdx.game.pantallas;
+package com.mygdx.game.pantallas.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -30,7 +30,7 @@ import com.mygdx.game.utiles.ConfiguracionesJuego;
 import com.mygdx.game.utiles.Recursos;
 
 
-public class Tienda implements Screen{
+public abstract class Tienda implements Screen{
 
 	
 	private Game g;
@@ -90,6 +90,7 @@ public class Tienda implements Screen{
                 public void clicked(InputEvent event, float x, float y) {
                 	if(itemSeleccionado !=null) {                		
                     System.out.println("Comprar " + itemSeleccionado.precio);
+                    
                 	}
                     
         

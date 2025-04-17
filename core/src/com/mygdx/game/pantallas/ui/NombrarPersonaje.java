@@ -1,4 +1,4 @@
-package com.mygdx.game.pantallas;
+package com.mygdx.game.pantallas.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -22,6 +22,8 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.enums.Atributos;
 import com.mygdx.game.enums.Clases;
+import com.mygdx.game.enums.PantallasDelJuego;
+
 import java.util.EnumMap;
 
 import com.mygdx.game.utiles.ConfiguracionesJuego;
@@ -29,22 +31,17 @@ import com.mygdx.game.utiles.Recursos;
 
 public class NombrarPersonaje implements Screen{
 	
-	private Game g;
 	private Stage stage;
-	private Skin skin;
-	
 	private TextField nombre, apodo;
 	
 	
-	public NombrarPersonaje(Game g) {
-		this.g = g;
+	public NombrarPersonaje() {
+		stage = new Stage(new ScreenViewport());
 	}
 	
 	@Override
 	public void show() {
-		stage = new Stage(new ScreenViewport());
 		Skin skin = VisUI.getSkin();
-		Gdx.input.setInputProcessor(stage);
 		
 
 		Table table = new Table();
@@ -68,7 +65,7 @@ public class NombrarPersonaje implements Screen{
 	        public void clicked(InputEvent event, float x, float y) {
 
 	        	System.out.println("Volver para atras click");
-	        	g.setScreen(new RepartirAtributos(g));
+	        	ConfiguracionesJuego.pantallaActual = PantallasDelJuego.REPARTIR_ATRIBUTOS;
 	        }
 	    });
 		table1.add(imageButton);

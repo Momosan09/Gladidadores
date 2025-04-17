@@ -1,4 +1,4 @@
-package com.mygdx.game.pantallas;
+package com.mygdx.game.pantallas.ui;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -17,23 +17,25 @@ import com.kotcrab.vis.ui.*;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.enums.Clases;
+import com.mygdx.game.enums.PantallasDelJuego;
+import com.mygdx.game.pantallas.Ocultable;
+import com.mygdx.game.pantallas.Pantalla;
 import com.mygdx.game.utiles.ConfiguracionesJuego;
 import com.mygdx.game.utiles.Recursos;
 
-public class SeleccionClase implements Screen{
+public class SeleccionClase extends Pantalla{
 
-	private Game g;
 	private Stage stage;
-	private Skin skin;
-	public SeleccionClase(Game g) {
-		this.g = g;
+	
+	public SeleccionClase() {
+		stage = new Stage(new ScreenViewport());
 	}
 	
 	@Override
 	public void show() {
-		stage = new Stage(new ScreenViewport());
+
 		Skin skin = VisUI.getSkin(); // Usar la skin que viene con VisUI
-		Gdx.input.setInputProcessor(stage);
+
 
 		Table table = new Table();
 		table.setFillParent(true);
@@ -87,7 +89,7 @@ public class SeleccionClase implements Screen{
 		    child.addListener(new ClickListener() {
 		        @Override
 		        public void clicked(InputEvent event, float x, float y) {
-		            ConfiguracionesJuego.claseJugador = (Clases) child.getUserObject(); // 👈 casteo directo
+		            ConfiguracionesJuego.claseJugador = (Clases) child.getUserObject(); // casteo directo
 		            System.out.println("Clase seleccionada: " + ConfiguracionesJuego.claseJugador);
 		        }
 		    });
@@ -104,7 +106,7 @@ public class SeleccionClase implements Screen{
 		    public void clicked(InputEvent event, float x, float y) {
 		    	if(ConfiguracionesJuego.claseJugador != Clases.SINCLASE) {		    		
 		        System.out.println("click");
-		        g.setScreen(new RepartirAtributos(g));
+		        ConfiguracionesJuego.pantallaActual = PantallasDelJuego.REPARTIR_ATRIBUTOS;
 		    	}else {
 		    		System.out.println("Debe elegir una clase");
 		    	}
@@ -121,6 +123,7 @@ public class SeleccionClase implements Screen{
 
 	@Override
 	public void render(float delta) {
+		stage.act(delta);
 		stage.draw();
 	}
 
@@ -142,10 +145,12 @@ public class SeleccionClase implements Screen{
 
 	@Override
 	public void dispose() {
+		stage.unfocusAll();
+		stage.dispose();
 	}
 
-	private void determinarClase() {
-		
+	public Stage getStage() {
+		return stage;
 	}
 	
 }
