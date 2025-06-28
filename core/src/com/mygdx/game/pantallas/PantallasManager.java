@@ -74,9 +74,10 @@ public class PantallasManager {
 			
 		case JUEGO:
 			if(juego == null) {
-				slCls.dispose();//Una vez que se entra al juego no se vuelve a usar
+				if(slCls != null)slCls.dispose();//Una vez que se entra al juego no se vuelve a usar
+				
 				//repAtr.dispose();
-				nomPers.dispose();//Una vez que se entra al juego no se vuelve a usar
+				if(nomPers != null)nomPers.dispose();//Una vez que se entra al juego no se vuelve a usar
 				juego = new Juego();
 //				ConfiguracionesJuego.muxPantallas.addProcessor(juego.getStage());
 			}

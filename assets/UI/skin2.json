@@ -1,0 +1,22 @@
+{
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	default: {
+		imageUp: defaultBTN
+		imageDown: defaultBTN
+		imageOver: defaultBTN
+		imageDisabled: defaultBTN
+	}
+	coliseo: {
+		imageUp: ArenaBTN
+		imageDown: ArenaBTN
+		imageOver: ArenaBTN
+		imageDisabled: ArenaBTN
+	}
+	mercado: {
+		imageUp: mercadoBTN
+		imageDown: mercadoBTN
+		imageOver: mercadoBTN
+		imageDisabled: mercadoBTN
+	}
+}
+}

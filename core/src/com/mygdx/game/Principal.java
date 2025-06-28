@@ -30,7 +30,7 @@ public class Principal extends Game {
 		Gdx.input.setInputProcessor(ConfiguracionesJuego.muxPantallas);
 		VisUI.load();
 		pm = new PantallasManager(this);
-		ConfiguracionesJuego.pantallaActual = PantallasDelJuego.SELECCION_CLASE;
+		ConfiguracionesJuego.pantallaActual = PantallasDelJuego.JUEGO;
 
 	}
 
